@@ -6,11 +6,13 @@ WHERE degrees.name = 'Corso di laurea in Economia'
 
 2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di
 Neuroscienze
+```sql
 SELECT *
 FROM degrees
 JOIN departments ON degrees.department_id = departments.id
 WHERE degrees.level = 'magistrale'
 AND departments.name = 'Dipartimento di Neuroscienze';
+
 
 3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
 SELECT courses.*
@@ -29,8 +31,19 @@ JOIN departments ON degrees.department_id = departments.id
 ORDER BY students.surname, students.name;
 
 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
+SELECT degrees.name AS degree_name,
+       courses.name AS course_name,
+       teachers.name AS teacher_name,
+       teachers.surname AS teacher_surname
+FROM degrees
+JOIN courses ON courses.degree_id = degrees.id
+JOIN course_teacher ON course_teacher.course_id = courses.id
+JOIN teachers ON teachers.id = course_teacher.teacher_id;
+
 6. Selezionare tutti i docenti che insegnano nel Dipartimento di
 Matematica (54)
 7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti
 per ogni esame, stampando anche il voto massimo. Successivamente,
 filtrare i tentativi con voto minimo 18.
+
+```
